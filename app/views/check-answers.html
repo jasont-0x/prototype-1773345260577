@@ -1,0 +1,79 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Check your answers before sending" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    <h1 class="govuk-heading-xl">Check your answers before sending</h1>
+
+    {{ govukSummaryList({
+      rows: [
+      {
+        key: { text: "Are you 18 or over?" },
+        value: { text: data["age-check"] if data["age-check"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/age-check",
+            text: "Change",
+            visuallyHiddenText: "are you 18 or over?"
+          }]
+        }
+      },
+      {
+        key: { text: "What is your full name?" },
+        value: { text: data["full-name"] if data["full-name"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/full-name",
+            text: "Change",
+            visuallyHiddenText: "what is your full name?"
+          }]
+        }
+      },
+      {
+        key: { text: "How would you like us to contact you?" },
+        value: { text: data["contact-method"] if data["contact-method"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/contact-method",
+            text: "Change",
+            visuallyHiddenText: "how would you like us to contact you?"
+          }]
+        }
+      },
+      {
+        key: { text: "What are your contact details?" },
+        value: { text: data["contact-details"] if data["contact-details"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/contact-details",
+            text: "Change",
+            visuallyHiddenText: "what are your contact details?"
+          }]
+        }
+      },
+      {
+        key: { text: "Why do you want to meet aliens?" },
+        value: { text: data["meeting-reason"] if data["meeting-reason"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/meeting-reason",
+            text: "Change",
+            visuallyHiddenText: "why do you want to meet aliens?"
+          }]
+        }
+      }
+      ]
+    }) }}
+
+    <form method="post" novalidate>
+      {{ govukButton({ text: "Confirm and send" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
