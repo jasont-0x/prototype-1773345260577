@@ -1,0 +1,37 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Why do you want to meet aliens?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["meeting-reason"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["meeting-reason"], href: "#meeting-reason" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukTextarea({
+      id: "meeting-reason",
+      name: "meeting-reason",
+      label: {
+        text: "Why do you want to meet aliens?",
+        isPageHeading: true,
+        classes: "govuk-label--l"
+      },
+      hint: { text: "Tell us your reasons in a few sentences" },
+      errorMessage: errors["meeting-reason"] if errors else null,
+      value: data["meeting-reason"],
+      rows: 5
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
